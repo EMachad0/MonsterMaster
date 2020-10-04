@@ -15,6 +15,13 @@ namespace GameAssets.Scripts
             
             if (isVisible || hasAuthority) Show();
             else Hide();
+
+            if (isClient)
+            {
+                var identity = NetworkClient.connection.identity;
+                var cc = identity.GetComponent<ClientController>();
+                if (cc.index == 1) transform.GetChild(1).Rotate(0, 0, 180);
+            }
         }
 
         public void Flip()
