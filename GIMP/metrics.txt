@@ -1,0 +1,3 @@
+Screen Size: 1366x720
+Card Size 150x100
+Card Space 160x106 border 3
