@@ -13,7 +13,6 @@ namespace GameAssets.Scripts
         private void Start()
         {
             _canvas = GameObject.Find("Canvas");
-            transform.SetParent(_canvas.transform);
             
             ClientCreate();
             name = "P" + index;
