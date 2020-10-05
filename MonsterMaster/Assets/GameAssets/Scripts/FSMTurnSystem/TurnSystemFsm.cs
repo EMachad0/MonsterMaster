@@ -1,3 +1,4 @@
+using System;
 using Mirror;
 using UnityEngine;
 
@@ -6,13 +7,13 @@ namespace GameAssets.Scripts.FSMTurnSystem
     public class TurnSystemFsm : NetworkBehaviour
     {
         public static TurnSystemFsm Instance;
-        
+
         [SerializeField] private TurnSystemAbstractState state;
 
-        protected virtual void Start()
+        protected virtual void Awake()
         {
             Instance = this;
-            ChangeTurn(ScriptableObject.CreateInstance<P1State>());
+            ChangeTurn(ScriptableObject.CreateInstance<PrepareTurnState>());
         }
         
         public void ChangeTurn(TurnSystemAbstractState novo)

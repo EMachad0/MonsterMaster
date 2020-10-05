@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 499951488234992723}
   - component: {fileID: 8811949838034116861}
   - component: {fileID: 1599174252288960852}
-  - component: {fileID: -3596802259542135017}
+  - component: {fileID: 1508313143466065237}
   m_Layer: 13
   m_Name: Player
   m_TagString: Untagged
@@ -69,7 +69,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   index: -1
---- !u!114 &-3596802259542135017
+--- !u!114 &1508313143466065237
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,4 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  card: {fileID: 7646915142602691069, guid: 2a73426b9c8077b7a843f67a5ad73d56, type: 3}
+  monsterPrefab: {fileID: 4282751151161499688, guid: 3658124c28230ee4584018d29853dc0c,
+    type: 3}
+  spellPrefab: {fileID: 4200717439381075204, guid: 7deaf110750da2a4689b76c0556bd6b1,
+    type: 3}
