@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace GameAssets.Scripts
 {
@@ -13,21 +12,22 @@ namespace GameAssets.Scripts
             Instance = this;
         }
 
-        public void Spawn(GameObject g, float time)
+        public void Spawn(GameObject g, float time, float fadeout)
         {
-            StartCoroutine(Routine(g, time));
+            StartCoroutine(Routine(g, time, fadeout));
         }
         
-        private IEnumerator Routine(GameObject g, float time)
+        private IEnumerator Routine(GameObject g, float time, float fadeout)
         {
-            g.SetActive(true);
-            yield return new WaitForSeconds(1);
-
             var canvas = g.GetComponent<CanvasGroup>();
+            
+            g.SetActive(true);
             canvas.alpha = 1;
+            yield return new WaitForSeconds(time);
+
             while (canvas.alpha > 0)
             {
-                canvas.alpha -= Time.deltaTime / time;
+                canvas.alpha -= Time.deltaTime / fadeout;
                 yield return null;
             }
             g.SetActive(false);

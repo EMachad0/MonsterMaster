@@ -1,4 +1,5 @@
 ﻿using GameAssets.Scripts;
+using GameAssets.Scripts.ClientScripts;
 using Mirror;
 using UnityEngine;
 

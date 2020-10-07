@@ -47,7 +47,7 @@ namespace TMPro.Examples
 
 
         private const string event_SmoothingValue = "Slider - Smoothing Value";
-        private const string event_FollowDistance = "Slider - Camera Zoom";
+        private const string event_FollowDistance = "Slider - Camera CardZoom";
 
 
         void Awake()
@@ -253,7 +253,7 @@ namespace TMPro.Examples
 
             }
 
-            // Check Pinching to Zoom in - out on Mobile device
+            // Check Pinching to CardZoom in - out on Mobile device
             if (touchCount == 2)
             {
                 Touch touch0 = Input.GetTouch(0);
@@ -277,7 +277,7 @@ namespace TMPro.Examples
 
             }
 
-            // Check MouseWheel to Zoom in-out
+            // Check MouseWheel to CardZoom in-out
             if (mouseWheel < -0.01f || mouseWheel > 0.01f)
             {
 

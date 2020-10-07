@@ -1,4 +1,5 @@
-﻿using Mirror;
+﻿using GameAssets.Scripts.ClientScripts;
+using Mirror;
 
 namespace GameAssets.Scripts
 {
