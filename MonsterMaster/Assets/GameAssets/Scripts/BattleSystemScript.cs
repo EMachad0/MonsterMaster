@@ -12,7 +12,6 @@ namespace GameAssets.Scripts
     {
         public float time;
         public float fadeoutTime;
-        public RandomNumber randomNumber;
 
         [SerializeField] private MonsterCardController atkCard;
         [SerializeField] private MonsterCardController defCard;
@@ -24,7 +23,6 @@ namespace GameAssets.Scripts
 
         private void Awake()
         {
-            randomNumber = GameObject.Find("RandomGenerator").GetComponent<RandomNumber>();
             atkCard = transform.GetChild(3).GetComponent<MonsterCardController>();
             defCard = transform.GetChild(4).GetComponent<MonsterCardController>();
             atkNumber = transform.GetChild(5).GetComponent<Text>();
@@ -68,10 +66,8 @@ namespace GameAssets.Scripts
         {
             for (var i = 0; i < time; i++)
             {
-                randomNumber.GenerateRandomNumber(0, maxAtk + 1);
-                atkNumber.text = randomNumber.randomNumber.ToString();
-                randomNumber.GenerateRandomNumber(0, maxDef + 1);
-                defNumber.text = randomNumber.randomNumber.ToString();
+                atkNumber.GetComponent<RandomNumber>().Generate(0, maxAtk);
+                defNumber.GetComponent<RandomNumber>().Generate(0, maxDef);
                 yield return new WaitForSeconds(1f);
             }
         }
