@@ -5,7 +5,7 @@ using Mirror;
 
 namespace GameAssets.Scripts
 {
-    public class HandScript : NetworkBehaviour
+    public class Hand : NetworkBehaviour
     {
         private int _lastChildCount;
         

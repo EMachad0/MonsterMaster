@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace GameAssets.Scripts
 {
-    public class BattleSystemScript : NetworkBehaviour
+    public class BattleSystem : NetworkBehaviour
     {
         public float time;
         public float fadeoutTime;

@@ -8,14 +8,14 @@ namespace GameAssets.Scripts.FSMDragDrop.States
     internal class DragDropBoard : DragDropBaseState
     {
 
-        private BattleSystemScript _popup;
+        private BattleSystem _popup;
 
         [SerializeField] private List<GameObject> colliders = new List<GameObject>();
 
         public override void OnEnable()
         {
             base.OnEnable();
-            _popup = PopupSpawner.Instance.FindObject("Battle").GetComponent<BattleSystemScript>();
+            _popup = PopupSpawner.Instance.FindObject("Battle").GetComponent<BattleSystem>();
         }
 
         public override void EndDrag(DragDropFsm fsm)

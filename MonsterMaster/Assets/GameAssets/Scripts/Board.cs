@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace GameAssets.Scripts
 {
-    public class BoardScript : NetworkBehaviour
+    public class Board : NetworkBehaviour
     {
         private int _lastChildCount;
 

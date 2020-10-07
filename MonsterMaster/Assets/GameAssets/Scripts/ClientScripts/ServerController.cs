@@ -128,7 +128,7 @@ namespace GameAssets.Scripts.ClientScripts
         [ClientRpc]
         private void RpcShowBattle(GameObject c1, GameObject c2)
         {
-            var popup = PopupSpawner.Instance.FindObject("Battle").GetComponent<BattleSystemScript>();
+            var popup = PopupSpawner.Instance.FindObject("Battle").GetComponent<BattleSystem>();
             popup.StartBattle(c1, c2);
         }
 

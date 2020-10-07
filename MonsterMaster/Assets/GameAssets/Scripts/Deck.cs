@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace GameAssets.Scripts
 {
-    public class DeckScript : NetworkBehaviour
+    public class Deck : NetworkBehaviour
     {
         private GameObject _grid;
         private GameObject _p1Hand;

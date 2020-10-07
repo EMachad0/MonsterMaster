@@ -5,21 +5,21 @@ using UnityEngine;
 
 namespace GameAssets.Scripts
 {
-    public class TurnButtonScript : NetworkBehaviour
+    public class TurnButton : NetworkBehaviour
     {
         public int playerIndex;
         
-        private HandScript _p1Hand;
-        private HandScript _p2Hand;
-        private BoardScript _p1Board;
-        private BoardScript _p2Board;
+        private Hand _p1Hand;
+        private Hand _p2Hand;
+        private Board _p1Board;
+        private Board _p2Board;
 
         private void Start()
         {
-            _p1Hand = GameObject.Find("P1Hand").GetComponent<HandScript>();
-            _p2Hand = GameObject.Find("P2Hand").GetComponent<HandScript>();
-            _p1Board = GameObject.Find("P1Board").GetComponent<BoardScript>();
-            _p2Board = GameObject.Find("P2Board").GetComponent<BoardScript>();
+            _p1Hand = GameObject.Find("P1Hand").GetComponent<Hand>();
+            _p2Hand = GameObject.Find("P2Hand").GetComponent<Hand>();
+            _p1Board = GameObject.Find("P1Board").GetComponent<Board>();
+            _p2Board = GameObject.Find("P2Board").GetComponent<Board>();
         }
 
         public void OnClick()
