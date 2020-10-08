@@ -1,4 +1,5 @@
 using GameAssets.Scripts.ClientScripts;
+using GameAssets.Scripts.ClientScripts.Controllers;
 using GameAssets.Scripts.FSMTurnSystem;
 using Mirror;
 using UnityEngine;
@@ -31,13 +32,11 @@ namespace GameAssets.Scripts
 
         private void UpdateCounters()
         {
-            
         }
 
         private void UpdateClients()
         {
-            var identity = NetworkClient.connection.identity;
-            identity.GetComponent<ServerController>().CmdEndTurn();
+            Server.LocalPlayer.GetComponent<TurnController>().CmdEndTurn();
         }
 
         public void Show()

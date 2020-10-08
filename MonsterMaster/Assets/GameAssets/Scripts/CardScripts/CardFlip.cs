@@ -19,7 +19,7 @@ namespace GameAssets.Scripts.CardScripts
 
             if (!isClient) return;
             var identity = NetworkClient.connection.identity;
-            var cc = identity.GetComponent<ClientController>();
+            var cc = identity.GetComponent<Client>();
             if (cc.index == 1) transform.GetChild(1).Rotate(0, 0, 180);
         }
 

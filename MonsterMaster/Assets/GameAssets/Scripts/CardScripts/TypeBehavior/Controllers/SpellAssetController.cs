@@ -1,10 +1,11 @@
 ﻿using GameAssets.Scripts.CardScripts.TypeBehavior.ScriptableObjects;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace GameAssets.Scripts.CardScripts.TypeBehavior.Controllers
 {
-    public class SpellCardController : CardController
+    public class SpellAssetController : AbstractAssetController
     {
         private Image _sprite;
         private TextMeshProUGUI _cardName;
@@ -18,12 +19,13 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.Controllers
             _cardEffect = Front.GetChild(2).GetComponent<TextMeshProUGUI>();
         }
 
-        public override void SetCard(CardSo card)
+        protected override CardSo LoadAsset(string s) => Resources.Load<SpellCardSo>(s);
+
+        protected override void SetAsset(CardSo so)
         {
-            base.SetCard(card);
-            var c = (SpellCardSo) card;
+            var c = (SpellCardSo) so;
+            _cardName.text = asset;
             _sprite.sprite = c.img;
-            _cardName.text = c.cardName;
             _cardEffect.text = c.cardEffectText;
         }
     }

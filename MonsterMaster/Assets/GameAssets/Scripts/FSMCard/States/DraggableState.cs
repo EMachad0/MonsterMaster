@@ -1,14 +1,11 @@
 using GameAssets.Scripts.ClientScripts;
-using Mirror;
+using GameAssets.Scripts.ClientScripts.Controllers;
 using UnityEngine;
 
-namespace GameAssets.Scripts.FSMDragDrop.States
+namespace GameAssets.Scripts.FSMCard.States
 {
-    public class DragDropBaseState : DragDropAbstractState
+    public class DraggableState : CardAbstractState
     {
-        protected NetworkIdentity Identity;
-        protected ServerController Ssc;
-        
         private GameObject _canvas;
 
         private GameObject _startParent;
@@ -16,27 +13,19 @@ namespace GameAssets.Scripts.FSMDragDrop.States
 
         public virtual void OnEnable()
         {
-            StartIdentity();
             _canvas = GameObject.Find("Canvas");
         }
 
-        [ClientCallback]
-        private void StartIdentity()
-        {
-            Identity = NetworkClient.connection.identity;
-            Ssc = Identity.GetComponent<ServerController>();
-        }
-
-        public override void BeginDrag(DragDropFsm fsm)
+        public override void BeginDrag(CardFsm fsm)
         {
             var transform = fsm.transform;
             
             _startParent = transform.parent.gameObject;
             _startPos = transform.position;
-            Ssc.CmdSetObjectParent(transform, _canvas.transform, true);
+            Server.LocalPlayer.GetComponent<CardController>().CmdCardParent(fsm.gameObject, _canvas, true);
         }
 
-        public override void Drag(DragDropFsm fsm)
+        public override void Drag(CardFsm fsm)
         {
             var transform = fsm.transform;
             
@@ -44,12 +33,12 @@ namespace GameAssets.Scripts.FSMDragDrop.States
             transform.position = mousePosition;
         }
 
-        public override void EndDrag(DragDropFsm fsm)
+        public override void EndDrag(CardFsm fsm)
         {
             var transform = fsm.transform;
-            
+
+            Server.LocalPlayer.GetComponent<CardController>().CmdCardParent(fsm.gameObject, _startParent, true);
             transform.position = _startPos;
-            Ssc.CmdSetObjectParent(transform, _startParent.transform, true);
         }
     }
 }

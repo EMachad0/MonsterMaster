@@ -1,7 +1,7 @@
 ﻿using GameAssets.Scripts.ClientScripts;
+using GameAssets.Scripts.ClientScripts.Controllers;
 using UnityEngine;
 using Mirror;
-using Random = UnityEngine.Random;
 
 namespace GameAssets.Scripts
 {
@@ -10,9 +10,6 @@ namespace GameAssets.Scripts
         private GameObject _grid;
         private GameObject _p1Hand;
         private GameObject _p2Hand;
-        
-        public GameObject monsterPrefab;
-        public GameObject spellPrefab;
         
         private void Start()
         {
@@ -23,14 +20,13 @@ namespace GameAssets.Scripts
 
         public void OnClick()
         {
-            var identity = NetworkClient.connection.identity;
-            var cc = identity.GetComponent<ClientController>();
-            var sc = identity.GetComponent<ServerController>();
+            var client = Server.LocalPlayer.GetComponent<Client>();
+            var cardController = Server.LocalPlayer.GetComponent<CardController>();
 
-            if (_grid.transform.childCount > 0)
-            {
-                sc.CmdSetObjectParent(_grid.transform.GetChild(0), (cc.index == 0 ? _p1Hand : _p2Hand).transform, false);
-            }
+            if (_grid.transform.childCount <= 0) return;
+            var card = _grid.transform.GetChild(0).gameObject;
+            cardController.CmdEndState(card);
+            cardController.CmdCardParent(card, client.index == 0 ? _p1Hand : _p2Hand, false);
         }
     }
 }

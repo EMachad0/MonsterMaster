@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8b1f34443840da961349650aacd2c2, type: 3}
   m_Name: Rat
   m_EditorClassIdentifier: 
-  cardName: Rat
   background: {r: 0.31176573, g: 0.5849056, b: 0.3182736, a: 1}
   img: {fileID: 21300000, guid: 691c5e9e0c3aee14aaeea970323fee04, type: 3}
   health: 2

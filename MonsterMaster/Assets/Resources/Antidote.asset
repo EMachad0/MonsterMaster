@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b705b479c084f4cbdd209c6e72c80a4, type: 3}
   m_Name: Antidote
   m_EditorClassIdentifier: 
-  cardName: Antidote
   img: {fileID: 21300000, guid: 6dfc66ff73d83174284521d235a8243b, type: 3}
   cardEffectText: Removes poison

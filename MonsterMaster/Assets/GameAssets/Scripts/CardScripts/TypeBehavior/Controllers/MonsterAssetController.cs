@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace GameAssets.Scripts.CardScripts.TypeBehavior.Controllers
 {
-    public class MonsterCardController : CardController
+    public class MonsterAssetController : AbstractAssetController
     {
         private Image _background;
         private TextMeshProUGUI _cardName;
@@ -29,13 +29,14 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.Controllers
             _cardEffect = Front.GetChild(8).GetComponent<TextMeshProUGUI>();
             _healthBar = Front.GetChild(9);
         }
+        
+        protected override CardSo LoadAsset(string s) => Resources.Load<MonsterCardSo>(s);
 
-        public override void SetCard(CardSo card)
+        protected override void SetAsset(CardSo so)
         {
-            base.SetCard(card);
-            var c = (MonsterCardSo) card;
+            var c = (MonsterCardSo) so;
+            _cardName.text = asset;
             _background.color = c.background;
-            _cardName.text = c.cardName;
             _sprite.sprite = c.img;
             _atk.text = c.atk.ToString();
             _def.text = c.def.ToString();

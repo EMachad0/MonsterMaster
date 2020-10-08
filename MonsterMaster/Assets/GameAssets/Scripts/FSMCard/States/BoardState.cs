@@ -1,32 +1,29 @@
 using System.Collections.Generic;
 using GameAssets.Scripts.ClientScripts;
+using GameAssets.Scripts.ClientScripts.Controllers;
 using Mirror;
 using UnityEngine;
 
-namespace GameAssets.Scripts.FSMDragDrop.States
+namespace GameAssets.Scripts.FSMCard.States
 {
-    internal class DragDropBoard : DragDropBaseState
+    internal class BoardState : DraggableState
     {
-
-        private BattleSystem _popup;
-
         [SerializeField] private List<GameObject> colliders = new List<GameObject>();
 
-        public override void OnEnable()
+        public override void StartState(CardFsm fsm)
         {
-            base.OnEnable();
-            _popup = PopupSpawner.Instance.FindObject("Battle").GetComponent<BattleSystem>();
+            base.StartState(fsm);
+            fsm.gameObject.layer = LayerMask.NameToLayer("CardHand");
         }
 
-        public override void EndDrag(DragDropFsm fsm)
+        public override void EndDrag(CardFsm fsm)
         {
             if (colliders.Count != 1) base.EndDrag(fsm);
             else
             {
+                var battleController = Server.LocalPlayer.GetComponent<BattleController>();
                 var enemy = colliders[0];
-                var identity = NetworkClient.connection.identity;
-                var sc = identity.GetComponent<ServerController>();
-                sc.CmdShowBattle(fsm.gameObject, enemy);
+                battleController.CmdShowBattle(fsm.gameObject, enemy);
                 base.EndDrag(fsm);
             }
         }

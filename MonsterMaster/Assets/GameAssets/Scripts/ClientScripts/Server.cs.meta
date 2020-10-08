@@ -6,7 +6,7 @@ MonoImporter:
   defaultReferences:
   - cardPrefab: {fileID: 7646915142602691069, guid: 2a73426b9c8077b7a843f67a5ad73d56,
       type: 3}
-  executionOrder: 200
+  executionOrder: -10
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

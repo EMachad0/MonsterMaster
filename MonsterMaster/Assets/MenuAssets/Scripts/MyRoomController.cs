@@ -19,8 +19,8 @@ namespace MenuAssets.Scripts
         /// <returns>true unless some code in here decides it needs to abort the replacement</returns>
         public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer)
         {
-            gamePlayer.GetComponent<ClientController>().SetIndex(roomPlayer.GetComponent<NetworkRoomPlayer>().index);
-            // var playerController = gamePlayer.GetComponent<ClientController>();
+            gamePlayer.GetComponent<Client>().index = roomPlayer.GetComponent<NetworkRoomPlayer>().index;
+            // var playerController = gamePlayer.GetComponent<Client>();
             // playerController.index = roomPlayer.GetComponent<NetworkRoomPlayer>().index;
             return true;
         }

@@ -148,10 +148,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  monsterPrefab: {fileID: 4282751151161499688, guid: 3658124c28230ee4584018d29853dc0c,
-    type: 3}
-  spellPrefab: {fileID: 4200717439381075204, guid: 7deaf110750da2a4689b76c0556bd6b1,
-    type: 3}
 --- !u!114 &5971036605403936397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,10 +248,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -320,11 +316,11 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 8
+  m_ChildAlignment: 4
   m_StartCorner: 3
   m_StartAxis: 1
   m_CellSize: {x: 100, y: 150}
-  m_Spacing: {x: -99, y: 1}
+  m_Spacing: {x: -99, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
 --- !u!114 &1648411055911247147

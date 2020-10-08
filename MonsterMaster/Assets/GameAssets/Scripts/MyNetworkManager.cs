@@ -1,5 +1,6 @@
 ﻿using GameAssets.Scripts.ClientScripts;
 using Mirror;
+using UnityEngine;
 
 namespace GameAssets.Scripts
 {
@@ -8,8 +9,19 @@ namespace GameAssets.Scripts
         public override void OnServerAddPlayer(NetworkConnection conn)
         {
             var player = Instantiate(playerPrefab);
-            player.GetComponent<ClientController>().SetIndex(numPlayers);
+            player.GetComponent<Client>().index = numPlayers;
             NetworkServer.AddPlayerForConnection(conn, player);
+        }
+
+        public override void OnServerReady(NetworkConnection conn)
+        {
+            Debug.Log("Ready");
+            base.OnServerReady(conn);
+        }
+
+        public override void OnServerDisconnect(NetworkConnection conn)
+        {
+            Server.LocalPlayer.GetComponent<Server>().CmdDisconnect();
         }
     }
 }

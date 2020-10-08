@@ -1,30 +1,14 @@
 using GameAssets.Scripts.ClientScripts;
 using Mirror;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace GameAssets.Scripts.FSMTurnSystem.States
 {
-    public class P2State : TurnSystemAbstractState
+    public class P2State : PlayerTurnState
     {
-        private GameObject _popup;
-
-        private void OnEnable()
-        {
-            _popup = PopupSpawner.Instance.FindObject("TurnPopup");
-        }
-
-        public override void StartTurn()
-        {
-            var txt = _popup.GetComponentInChildren<Text>();
-            txt.text = "Player 2's turn";
-            PopupSpawner.Instance.Spawn(_popup, 1, 2);
-        }
-        
         public override bool IsMyTurn()
         {
             var identity = NetworkClient.connection.identity;
-            var cc =  identity.GetComponent<ClientController>();
+            var cc =  identity.GetComponent<Client>();
             return cc.index == 1;
         }
         
@@ -32,5 +16,7 @@ namespace GameAssets.Scripts.FSMTurnSystem.States
         {
             fsm.ChangeTurn(CreateInstance<P1State>());
         }
+        
+        protected override string TurnText() => "Player's 2 turn";
     }
 }

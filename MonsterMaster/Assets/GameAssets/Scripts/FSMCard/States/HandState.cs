@@ -1,10 +1,11 @@
 ﻿using GameAssets.Scripts.ClientScripts;
+using GameAssets.Scripts.ClientScripts.Controllers;
 using Mirror;
 using UnityEngine;
 
-namespace GameAssets.Scripts.FSMDragDrop.States
+namespace GameAssets.Scripts.FSMCard.States
 {
-    internal class DragDropHand : DragDropBaseState
+    internal class HandState : DraggableState
     {
 
         [SerializeField] private bool isOverBoard;
@@ -19,17 +20,24 @@ namespace GameAssets.Scripts.FSMDragDrop.States
         [ClientCallback]
         private void StartBoard()
         {
-            var cc = Identity.GetComponent<ClientController>();
+            var cc = Server.LocalPlayer.GetComponent<Client>();
             board = GameObject.Find(cc.index == 0 ? "P1Board" : "P2Board");
         }
 
-        public override void EndDrag(DragDropFsm fsm)
+        public override void StartState(CardFsm fsm)
+        {
+            base.StartState(fsm);
+            fsm.gameObject.layer = LayerMask.NameToLayer("CardHand");
+        }
+
+        public override void EndDrag(CardFsm fsm)
         {
             if (!isOverBoard) base.EndDrag(fsm);
             else
             {
-                Ssc.CmdSetObjectParent(fsm.transform, board.transform, false);
-                Ssc.CmdSetVisibility(fsm.gameObject, true);
+                var cardController = Server.LocalPlayer.GetComponent<CardController>();
+                cardController.CmdCardParent(fsm.gameObject, board, false);
+                cardController.CmdEndState(fsm.gameObject);
             }
         }
 
@@ -41,6 +49,11 @@ namespace GameAssets.Scripts.FSMDragDrop.States
         public override void OnCollisionExit2D(Collision2D collision2D)
         {
             if (collision2D.gameObject == board) isOverBoard = false;
+        }
+
+        public override void EndState(CardFsm fsm)
+        {
+            fsm.ChangeState(CreateInstance<BoardState>());
         }
     }
 }
