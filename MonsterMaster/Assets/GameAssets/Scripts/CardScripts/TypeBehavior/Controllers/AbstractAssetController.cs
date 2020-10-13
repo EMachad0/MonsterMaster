@@ -9,7 +9,7 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.Controllers
         [SyncVar(hook = nameof(AssetChange))]
         public string asset;
         
-        private CardSo _cardSo;
+        [SerializeField] private CardSo cardSo;
         
         protected Transform Front;
 
@@ -21,8 +21,8 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.Controllers
         private void AssetChange(string oldValue, string newValue)
         {
             name = newValue;
-            _cardSo = LoadAsset(newValue);
-            if (_cardSo) SetAsset(_cardSo);
+            cardSo = LoadAsset(newValue);
+            if (cardSo) SetAsset(cardSo);
             else Debug.LogError("Null Asset");
         }
 

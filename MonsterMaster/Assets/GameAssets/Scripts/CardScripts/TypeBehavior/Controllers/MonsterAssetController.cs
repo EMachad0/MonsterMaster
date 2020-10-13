@@ -1,4 +1,5 @@
 ﻿using GameAssets.Scripts.CardScripts.TypeBehavior.ScriptableObjects;
+using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,8 +16,16 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.Controllers
         private TextMeshProUGUI _cardEffect;
         private Transform _healthBar;
         
-        [SerializeField] private int maxHealth;
-        [SerializeField] private int curHealth;
+        [Range(0, 10)] public int maxHealth;
+        
+        [Range(0, 10), SyncVar(hook = nameof(UpdateHealth))]
+        public int curHealth = 10;
+        
+        [SyncVar(hook = nameof(UpdateAttack))]
+        public int attack;
+        
+        [SyncVar(hook = nameof(UpdateDefense))]
+        public int defense;
 
         protected override void Awake()
         {
@@ -29,7 +38,7 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.Controllers
             _cardEffect = Front.GetChild(8).GetComponent<TextMeshProUGUI>();
             _healthBar = Front.GetChild(9);
         }
-        
+
         protected override CardSo LoadAsset(string s) => Resources.Load<MonsterCardSo>(s);
 
         protected override void SetAsset(CardSo so)
@@ -38,16 +47,27 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.Controllers
             _cardName.text = asset;
             _background.color = c.background;
             _sprite.sprite = c.img;
-            _atk.text = c.atk.ToString();
-            _def.text = c.def.ToString();
             _cardEffect.text = c.cardEffectText;
 
             maxHealth = c.health;
-            curHealth = c.health;
-            for (var i = maxHealth; i < 10; i++)
+
+            if (isServer)
             {
-                _healthBar.GetChild(i).gameObject.SetActive(false);
+                attack = c.atk;
+                defense = c.def;
+                curHealth = c.health;
             }
         }
+
+        private void UpdateHealth(int oldValue, int newValue)
+        {
+            for (var i = 0; i < 10; i++)
+            {
+                _healthBar.GetChild(i).gameObject.SetActive(i < newValue);
+            }
+        }
+
+        private void UpdateAttack(int oldValue, int newValue) => _atk.text = newValue.ToString();
+        private void UpdateDefense(int oldValue, int newValue) => _def.text = newValue.ToString();
     }
 }

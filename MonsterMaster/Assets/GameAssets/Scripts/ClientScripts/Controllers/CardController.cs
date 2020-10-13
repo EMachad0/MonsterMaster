@@ -16,15 +16,16 @@ namespace GameAssets.Scripts.ClientScripts.Controllers
         public void CmdSpawnCard(CardType type, string asset, GameObject parent)
         {
             GameObject c;
+            AbstractAssetController assetController;
             switch (type)
             {
                 case CardType.Monster:
                     c = Instantiate(monsterPrefab);
-                    c.GetComponent<MonsterAssetController>().asset = asset;
+                    assetController = c.GetComponent<MonsterAssetController>();
                     break;
                 case CardType.Spell:
                     c = Instantiate(spellPrefab);
-                    c.GetComponent<SpellAssetController>().asset = asset;
+                    assetController = c.GetComponent<SpellAssetController>();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -32,6 +33,7 @@ namespace GameAssets.Scripts.ClientScripts.Controllers
 
             c.GetComponent<CardParent>().parent = parent;
             NetworkServer.Spawn(c, connectionToClient);
+            assetController.asset = asset;
         }
         
         [Command]
@@ -71,7 +73,39 @@ namespace GameAssets.Scripts.ClientScripts.Controllers
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
-
+        
+        [Command]
+        public void CmdHeal(GameObject card, int v)
+        {
+            var c = card.GetComponent<MonsterAssetController>();
+            c.curHealth = Math.Min(c.maxHealth, c.curHealth + v);
+        }
+        
+        [Command]
+        public void CmdDamage(GameObject card, int v)
+        {
+            var c = card.GetComponent<MonsterAssetController>();
+            c.curHealth = Math.Max(0, c.curHealth - v);
+        }
+        
+        [Command]
+        public void CmdSetHealth(GameObject card, int v)
+        {
+            card.GetComponent<MonsterAssetController>().curHealth = v;
+        }
+        
+        [Command]
+        public void CmdSetAttack(GameObject card, int v)
+        {
+            card.GetComponent<MonsterAssetController>().attack = v;
+        }
+        
+        [Command]
+        public void CmdSetDefense(GameObject card, int v)
+        {
+            card.GetComponent<MonsterAssetController>().defense = v;
+        }
+        
         [Command]
         public void CmdEndState(GameObject card)
         {

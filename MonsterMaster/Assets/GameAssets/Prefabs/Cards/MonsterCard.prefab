@@ -839,7 +839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  soCard: {fileID: 0}
+  asset: 
   maxHealth: 0
   curHealth: 0
 --- !u!1 &8005853331211431177
@@ -1154,6 +1154,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313082384869569590, guid: 3b52cb6cef905e5488946074babc78d9,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313082384869569590, guid: 3b52cb6cef905e5488946074babc78d9,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313082384869569590, guid: 3b52cb6cef905e5488946074babc78d9,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b52cb6cef905e5488946074babc78d9, type: 3}

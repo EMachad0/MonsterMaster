@@ -3462,7 +3462,7 @@ MonoBehaviour:
   syncInterval: 0.1
   asset: 
   maxHealth: 0
-  curHealth: 0
+  curHealth: 10
 --- !u!114 &907762724030117287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3479,7 +3479,7 @@ MonoBehaviour:
   syncInterval: 0.1
   asset: 
   maxHealth: 0
-  curHealth: 0
+  curHealth: 10
 --- !u!1 &908084683955270286
 GameObject:
   m_ObjectHideFlags: 0
