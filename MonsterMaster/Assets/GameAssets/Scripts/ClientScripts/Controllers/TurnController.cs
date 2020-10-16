@@ -7,15 +7,9 @@ namespace GameAssets.Scripts.ClientScripts.Controllers
     {
         
         [Command]
-        public void CmdEndTurn()
-        {
-            RpcEndTurn();
-        } 
-        
+        public void CmdEndTurn() => RpcEndTurn();
+
         [ClientRpc]
-        private void RpcEndTurn()
-        {
-            TurnSystemFsm.Instance.EndTurn();
-        }
+        private void RpcEndTurn() => TurnSystemFsm.Instance.EndTurn();
     }
 }

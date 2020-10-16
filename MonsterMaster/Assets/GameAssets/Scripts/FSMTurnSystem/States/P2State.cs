@@ -7,8 +7,7 @@ namespace GameAssets.Scripts.FSMTurnSystem.States
     {
         public override bool IsMyTurn()
         {
-            var identity = NetworkClient.connection.identity;
-            var cc =  identity.GetComponent<Client>();
+            var cc = Server.LocalPlayer.GetComponent<Client>();
             return cc.index == 1;
         }
         
@@ -16,7 +15,5 @@ namespace GameAssets.Scripts.FSMTurnSystem.States
         {
             fsm.ChangeTurn(CreateInstance<P1State>());
         }
-        
-        protected override string TurnText() => "Player's 2 turn";
     }
 }

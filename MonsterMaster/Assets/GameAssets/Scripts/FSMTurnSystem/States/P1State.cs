@@ -1,5 +1,4 @@
 using GameAssets.Scripts.ClientScripts;
-using Mirror;
 
 namespace GameAssets.Scripts.FSMTurnSystem.States
 {
@@ -7,8 +6,7 @@ namespace GameAssets.Scripts.FSMTurnSystem.States
     {
         public override bool IsMyTurn()
         {
-            var identity = NetworkClient.connection.identity;
-            var cc =  identity.GetComponent<Client>();
+            var cc = Server.LocalPlayer.GetComponent<Client>();
             return cc.index == 0;
         }
 
@@ -16,7 +14,5 @@ namespace GameAssets.Scripts.FSMTurnSystem.States
         {
             fsm.ChangeTurn(CreateInstance<P2State>());
         }
-
-        protected override string TurnText() => "Player's 1 turn";
     }
 }

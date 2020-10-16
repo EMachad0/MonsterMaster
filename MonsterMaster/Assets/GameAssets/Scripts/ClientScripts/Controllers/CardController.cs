@@ -1,7 +1,7 @@
 ﻿using System;
 using GameAssets.Scripts.CardScripts;
+using GameAssets.Scripts.CardScripts.FSMCard;
 using GameAssets.Scripts.CardScripts.TypeBehavior.Controllers;
-using GameAssets.Scripts.FSMCard;
 using Mirror;
 using UnityEngine;
 
@@ -117,5 +117,11 @@ namespace GameAssets.Scripts.ClientScripts.Controllers
         {
             card.GetComponent<CardFsm>().EndState();
         }
+        
+        [Command]
+        public void CmdCardCollision(GameObject a, GameObject b) => RpcCardCollision(a, b);
+
+        [ClientRpc]
+        private void RpcCardCollision(GameObject a, GameObject b) => CardEvents.CardCollision(a, b);
     }
 }

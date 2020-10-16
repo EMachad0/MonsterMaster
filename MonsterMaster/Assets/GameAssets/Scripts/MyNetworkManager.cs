@@ -13,12 +13,6 @@ namespace GameAssets.Scripts
             NetworkServer.AddPlayerForConnection(conn, player);
         }
 
-        public override void OnServerReady(NetworkConnection conn)
-        {
-            Debug.Log("Ready");
-            base.OnServerReady(conn);
-        }
-
         public override void OnServerDisconnect(NetworkConnection conn)
         {
             Server.LocalPlayer.GetComponent<Server>().CmdDisconnect();

@@ -1,4 +1,3 @@
-using GameAssets.Scripts.FSMCard;
 using UnityEngine;
 using Mirror;
 

@@ -1,5 +1,5 @@
 using GameAssets.Scripts.CardScripts;
-using GameAssets.Scripts.FSMCard;
+using GameAssets.Scripts.CardScripts.FSMCard;
 using Mirror;
 using UnityEngine;
 

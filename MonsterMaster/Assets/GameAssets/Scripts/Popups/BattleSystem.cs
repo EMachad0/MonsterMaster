@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using GameAssets.Scripts.CardScripts;
 using GameAssets.Scripts.CardScripts.TypeBehavior.Controllers;
 using Mirror;
 using UnityEngine;
@@ -31,6 +32,13 @@ namespace GameAssets.Scripts.Popups
         {
             StartCoroutine(ShowRoutine());
             // gameObject.SetActive(false);
+
+            CardEvents.OnCardCollision += StartBattle;
+        }
+
+        private void OnDestroy()
+        {
+            CardEvents.OnCardCollision -= StartBattle;
         }
 
         public void StartBattle(GameObject atk, GameObject def)
@@ -83,8 +91,16 @@ namespace GameAssets.Scripts.Popups
             yield return new WaitForSeconds(time);
 
             var damage = atkNumber.randomNumber - defNumber.randomNumber;
-            if (damage > 0) def.GetComponent<MonsterAssetController>().curHealth -= damage;
-            else atk.GetComponent<MonsterAssetController>().curHealth += damage;
+            if (damage > 0)
+            {
+                defCard.curHealth -= damage;
+                def.GetComponent<MonsterAssetController>().curHealth -= damage;
+            }
+            else
+            {
+                atkCard.curHealth += damage;
+                atk.GetComponent<MonsterAssetController>().curHealth += damage;
+            }
         }
     }
 }

@@ -1,9 +1,11 @@
+using System;
 using GameAssets.Scripts.FSMTurnSystem.States;
+using Mirror;
 using UnityEngine;
 
 namespace GameAssets.Scripts.FSMTurnSystem
 {
-    public class TurnSystemFsm : MonoBehaviour
+    public class TurnSystemFsm : NetworkBehaviour
     {
         public static TurnSystemFsm Instance;
 
@@ -18,17 +20,26 @@ namespace GameAssets.Scripts.FSMTurnSystem
         public void ChangeTurn(TurnSystemAbstractState novo)
         {
             state = novo;
-            state.StartTurn();
+            StartTurn();
         }
 
-        public bool IsMyTurn()
+        public bool IsMyTurn() => state.IsMyTurn();
+
+        public void StartTurn()
         {
-            return state.IsMyTurn();
+            state.StartTurn(this);
+            OnStartTurn?.Invoke();
         }
 
         public void EndTurn()
         {
             state.EndTurn(this);
+            OnEndTurn?.Invoke();
         }
+        
+        public string State => nameof(state);
+
+        public static event Action OnStartTurn;
+        public static event Action OnEndTurn;
     }
 }
