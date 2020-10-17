@@ -7,5 +7,7 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.ScriptableObjects
     {
         public Sprite img;
         public string cardEffectText;
+        
+        private void OnEnable() => type = CardType.Spell;
     }
 }

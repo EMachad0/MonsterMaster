@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace GameAssets.Scripts.CardScripts.TypeBehavior.ScriptableObjects
 {
@@ -12,5 +13,7 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.ScriptableObjects
         public int def;
         public string cardEffectText;
         public int sickness;
+
+        private void OnEnable() => type = CardType.Monster;
     }
 }

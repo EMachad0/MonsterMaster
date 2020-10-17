@@ -12,7 +12,6 @@ namespace GameAssets.Scripts.Popups
     {
         public float time;
         public float fadeoutTime;
-        public string trigger;
 
         private CanvasGroup _canvas;
         private Text _text;
