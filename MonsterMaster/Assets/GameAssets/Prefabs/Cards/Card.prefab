@@ -87,12 +87,13 @@ GameObject:
   - component: {fileID: 5686958068931935442}
   - component: {fileID: -5845784259507347540}
   - component: {fileID: 7048950870542790889}
+  - component: {fileID: 2634063955869257394}
+  - component: {fileID: 1817603177340946504}
   - component: {fileID: 2736888689403928594}
   - component: {fileID: -7212498593556164939}
   - component: {fileID: 3848040365127779143}
   - component: {fileID: -965829891013904501}
   - component: {fileID: -2460822677462502827}
-  - component: {fileID: 2634063955869257394}
   m_Layer: 10
   m_Name: Card
   m_TagString: Untagged
@@ -172,6 +173,38 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   isVisible: 0
+--- !u!114 &2634063955869257394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7646915142602691069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57e35626d2742d4b3fe8d0b52e0f434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  parent: {fileID: 0}
+  worldPosStay: 0
+--- !u!114 &1817603177340946504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7646915142602691069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7160c646a24bfb85e1d598cb79d1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  so: 
+  cardSo: {fileID: 0}
 --- !u!114 &2736888689403928594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,21 +374,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 75}
   m_EdgeRadius: 0
---- !u!114 &2634063955869257394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7646915142602691069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57e35626d2742d4b3fe8d0b52e0f434, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  parent: {fileID: 0}
 --- !u!1 &9036323790768619074
 GameObject:
   m_ObjectHideFlags: 0

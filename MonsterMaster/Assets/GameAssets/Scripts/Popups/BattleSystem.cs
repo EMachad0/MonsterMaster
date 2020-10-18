@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using GameAssets.Scripts.CardScripts;
-using GameAssets.Scripts.CardScripts.TypeBehavior.Controllers;
+using GameAssets.Scripts.CardScripts.TypeBehavior.AssetLoader;
 using Mirror;
 using UnityEngine;
 
@@ -12,8 +12,8 @@ namespace GameAssets.Scripts.Popups
         public float fadeoutTime;
         public float randomTime;
 
-        [SerializeField] private MonsterAssetController atkCard;
-        [SerializeField] private MonsterAssetController defCard;
+        [SerializeField] private MonsterAssetLoader atkCard;
+        [SerializeField] private MonsterAssetLoader defCard;
         [SerializeField] private RandomNumber atkNumber;
         [SerializeField] private RandomNumber defNumber;
         
@@ -21,8 +21,8 @@ namespace GameAssets.Scripts.Popups
 
         private void Awake()
         {
-            atkCard = transform.GetChild(3).GetComponent<MonsterAssetController>();
-            defCard = transform.GetChild(4).GetComponent<MonsterAssetController>();
+            atkCard = transform.GetChild(3).GetComponent<MonsterAssetLoader>();
+            defCard = transform.GetChild(4).GetComponent<MonsterAssetLoader>();
             atkNumber = transform.GetChild(5).GetComponent<RandomNumber>();
             defNumber = transform.GetChild(6).GetComponent<RandomNumber>();
             _canvas = GetComponent<CanvasGroup>();
@@ -43,24 +43,24 @@ namespace GameAssets.Scripts.Popups
 
         public void StartBattle(GameObject atk, GameObject def)
         {
-            if (atk is null || def is null) return;
-            
-            gameObject.SetActive(true);
-            _canvas.alpha = 1;
-            
-            StartCoroutine(ShowRoutine());
-
-            if (!isServer) return;
-            var atkController = atk.GetComponent<MonsterAssetController>();
-            var defController = def.GetComponent<MonsterAssetController>();
-            
-            atkCard.asset = atkController.asset;
-            atkCard.curHealth = atkController.curHealth;
-            defCard.asset = defController.asset;
-            defCard.curHealth = defController.curHealth;
-
-            StartCoroutine(RandomNumbers(atkController.attack, defController.defense));
-            StartCoroutine(ResolveBattle(atk, def));
+            // if (atk is null || def is null) return;
+            //
+            // gameObject.SetActive(true);
+            // _canvas.alpha = 1;
+            //
+            // StartCoroutine(ShowRoutine());
+            //
+            // if (!isServer) return;
+            // var atkController = atk.GetComponent<MonsterAssetLoader>();
+            // var defController = def.GetComponent<MonsterAssetLoader>();
+            //
+            // atkCard.asset = atkController.asset;
+            // atkCard.curHealth = atkController.curHealth;
+            // defCard.asset = defController.asset;
+            // defCard.curHealth = defController.curHealth;
+            //
+            // StartCoroutine(RandomNumbers(atkController.attack, defController.defense));
+            // StartCoroutine(ResolveBattle(atk, def));
         }
         
         private IEnumerator ShowRoutine()
@@ -86,21 +86,21 @@ namespace GameAssets.Scripts.Popups
             }
         }
 
-        private IEnumerator ResolveBattle(GameObject atk, GameObject def)
-        {
-            yield return new WaitForSeconds(time);
-
-            var damage = atkNumber.randomNumber - defNumber.randomNumber;
-            if (damage > 0)
-            {
-                defCard.curHealth -= damage;
-                def.GetComponent<MonsterAssetController>().curHealth -= damage;
-            }
-            else
-            {
-                atkCard.curHealth += damage;
-                atk.GetComponent<MonsterAssetController>().curHealth += damage;
-            }
-        }
+        // private IEnumerator ResolveBattle(GameObject atk, GameObject def)
+        // {
+        //     yield return new WaitForSeconds(time);
+        //
+        //     var damage = atkNumber.randomNumber - defNumber.randomNumber;
+        //     if (damage > 0)
+        //     {
+        //         defCard.curHealth -= damage;
+        //         def.GetComponent<MonsterAssetLoader>().curHealth -= damage;
+        //     }
+        //     else
+        //     {
+        //         atkCard.curHealth += damage;
+        //         atk.GetComponent<MonsterAssetLoader>().curHealth += damage;
+        //     }
+        // }
     }
 }

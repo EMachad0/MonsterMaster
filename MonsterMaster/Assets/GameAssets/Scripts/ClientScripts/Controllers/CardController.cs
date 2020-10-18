@@ -1,7 +1,8 @@
 ﻿using System;
 using GameAssets.Scripts.CardScripts;
 using GameAssets.Scripts.CardScripts.FSMCard;
-using GameAssets.Scripts.CardScripts.TypeBehavior.Controllers;
+using GameAssets.Scripts.CardScripts.TypeBehavior;
+using GameAssets.Scripts.CardScripts.TypeBehavior.AssetLoader;
 using Mirror;
 using UnityEngine;
 
@@ -13,27 +14,24 @@ namespace GameAssets.Scripts.ClientScripts.Controllers
         public GameObject spellPrefab;
 
         [Command]
-        public void CmdSpawnCard(CardType type, string asset, GameObject parent)
+        public void CmdSpawnCard(CardType type, string soName, GameObject parent)
         {
             GameObject c;
-            AbstractAssetController assetController;
             switch (type)
             {
                 case CardType.Monster:
                     c = Instantiate(monsterPrefab);
-                    assetController = c.GetComponent<MonsterAssetController>();
                     break;
                 case CardType.Spell:
                     c = Instantiate(spellPrefab);
-                    assetController = c.GetComponent<SpellAssetController>();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
 
-            c.GetComponent<CardParent>().parent = parent;
             NetworkServer.Spawn(c, connectionToClient);
-            assetController.asset = asset;
+            c.GetComponent<CardParent>().parent = parent;
+            c.GetComponent<SoLoader>().so = soName;
         }
         
         [Command]
@@ -59,53 +57,11 @@ namespace GameAssets.Scripts.ClientScripts.Controllers
         }
         
         [Command]
-        public void CmdCardAsset(GameObject card, CardType type, string asset)
-        {
-            switch (type)
-            {
-                case CardType.Monster:
-                    card.GetComponent<MonsterAssetController>().asset = asset;
-                    break;
-                case CardType.Spell:
-                    card.GetComponent<SpellAssetController>().asset = asset;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
-            }
-        }
-        
-        [Command]
-        public void CmdHeal(GameObject card, int v)
-        {
-            var c = card.GetComponent<MonsterAssetController>();
-            c.curHealth = Math.Min(c.maxHealth, c.curHealth + v);
-        }
-        
-        [Command]
-        public void CmdDamage(GameObject card, int v)
-        {
-            var c = card.GetComponent<MonsterAssetController>();
-            c.curHealth = Math.Max(0, c.curHealth - v);
-        }
-        
-        [Command]
-        public void CmdSetHealth(GameObject card, int v)
-        {
-            card.GetComponent<MonsterAssetController>().curHealth = v;
-        }
-        
-        [Command]
-        public void CmdSetAttack(GameObject card, int v)
-        {
-            card.GetComponent<MonsterAssetController>().attack = v;
-        }
-        
-        [Command]
-        public void CmdSetDefense(GameObject card, int v)
-        {
-            card.GetComponent<MonsterAssetController>().defense = v;
-        }
-        
+        public void CmdCardSoChange(GameObject card, string so) => card.GetComponent<SoLoader>().so = so;
+
+        [ClientRpc, ServerCallback]
+        public void RpcCardSoChange(GameObject card) => CardEvents.SoChange(card);
+
         [Command]
         public void CmdEndState(GameObject card)
         {
