@@ -9,7 +9,6 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.ScriptableObjects
         {
             base.OnEnable();
             background = new Color(0.26f, 0.57f, 0.26f);
-            maxHealth = 2;
             health = 2;
             atk = 2;
             def = 1;

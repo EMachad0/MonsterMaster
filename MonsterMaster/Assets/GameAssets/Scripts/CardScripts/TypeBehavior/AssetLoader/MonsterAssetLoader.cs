@@ -11,10 +11,50 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.AssetLoader
         private Image _background;
         private TextMeshProUGUI _cardName;
         private Image _sprite;
+        private TextMeshProUGUI _cardEffect;
         private Text _def;
         private Text _atk;
-        private TextMeshProUGUI _cardEffect;
         private Transform _healthBar;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            CardEvents.OnCardHealthChange += OnCardHealthChange;
+            CardEvents.OnCardAtkChange += OnCardAtkChange;
+            CardEvents.OnCardDefChange += OnCardDefChange;
+        }
+
+        protected override void OnDestroy()
+        {
+            CardEvents.OnCardHealthChange -= OnCardHealthChange;
+            CardEvents.OnCardAtkChange -= OnCardAtkChange;
+            CardEvents.OnCardDefChange -= OnCardDefChange;
+        }
+
+        private void OnCardHealthChange(GameObject g)
+        {
+            if (g != gameObject) return;
+            var so = (MonsterCardSo) SoLoader.So;
+            for (var i = 0; i < _healthBar.transform.childCount; i++)
+            {
+                _healthBar.GetChild(i).gameObject.SetActive(i < so.health);
+            }
+        }
+
+        private void OnCardAtkChange(GameObject g)
+        {
+            if (g != gameObject) return;
+            var so = (MonsterCardSo) SoLoader.So;
+            _atk.text = so.atk.ToString();
+        }
+
+        private void OnCardDefChange(GameObject g)
+        {
+            if (g != gameObject) return;
+            var so = (MonsterCardSo) SoLoader.So;
+            _def.text = so.def.ToString();
+        }
+
 
         protected override void GetComponents()
         {
@@ -35,8 +75,6 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.AssetLoader
             _background.color = c.background;
             _sprite.sprite = c.img;
             _cardEffect.text = c.cardEffectText;
-            _def.text = c.def.ToString();
-            _atk.text = c.atk.ToString();
         }
     }
 }

@@ -2,7 +2,6 @@
 using GameAssets.Scripts.CardScripts;
 using GameAssets.Scripts.CardScripts.FSMCard;
 using GameAssets.Scripts.CardScripts.TypeBehavior;
-using GameAssets.Scripts.CardScripts.TypeBehavior.AssetLoader;
 using Mirror;
 using UnityEngine;
 
@@ -31,7 +30,7 @@ namespace GameAssets.Scripts.ClientScripts.Controllers
 
             NetworkServer.Spawn(c, connectionToClient);
             c.GetComponent<CardParent>().parent = parent;
-            c.GetComponent<SoLoader>().so = soName;
+            c.GetComponent<SoLoader>().soName = soName;
         }
         
         [Command]
@@ -55,28 +54,23 @@ namespace GameAssets.Scripts.ClientScripts.Controllers
             cardParent.worldPosStay = worldPosStays;
             cardParent.parent = parent;
         }
+
+        [Command]
+        public void CmdSetHealth(GameObject card, int v) => card.GetComponent<StatsLoader>().health = v;
+        [Command]
+        public void CmdSetAttack(GameObject card, int v) => card.GetComponent<StatsLoader>().atk = v;
+        [Command]
+        public void CmdSetDefense(GameObject card, int v) => card.GetComponent<StatsLoader>().def = v;
+        [Command]
+        public void CmdCardSoChange(GameObject card, string so) => card.GetComponent<SoLoader>().soName = so;
         
         [Command]
-        public void CmdCardSoChange(GameObject card, string so) => card.GetComponent<SoLoader>().so = so;
-
-        [ClientRpc, ServerCallback]
-        public void RpcCardSoChange(GameObject card) => CardEvents.SoChange(card);
-
-        [Command]
-        public void CmdEndState(GameObject card)
-        {
-            RpcEndState(card);
-        }
-
+        public void CmdEndState(GameObject card) => RpcEndState(card);
         [ClientRpc]
-        private void RpcEndState(GameObject card)
-        {
-            card.GetComponent<CardFsm>().EndState();
-        }
-        
+        private void RpcEndState(GameObject card) => card.GetComponent<CardFsm>().EndState();
+
         [Command]
         public void CmdCardCollision(GameObject a, GameObject b) => RpcCardCollision(a, b);
-
         [ClientRpc]
         private void RpcCardCollision(GameObject a, GameObject b) => CardEvents.CardCollision(a, b);
     }

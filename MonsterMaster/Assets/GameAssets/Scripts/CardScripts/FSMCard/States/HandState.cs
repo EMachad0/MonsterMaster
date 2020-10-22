@@ -12,7 +12,7 @@ namespace GameAssets.Scripts.CardScripts.FSMCard.States
         [SerializeField] private GameObject board;
 
         public override void OnEnable()
-        { 
+        {
             base.OnEnable();
             StartBoard();
         }

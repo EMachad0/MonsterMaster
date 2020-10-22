@@ -6,11 +6,11 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.AssetLoader
 {
     public abstract class AbstractAssetLoader : NetworkBehaviour
     {
-        private SoLoader _soLoader;
+        protected SoLoader SoLoader;
         
         protected virtual void Awake()
         {
-            _soLoader = GetComponent<SoLoader>();
+            SoLoader = GetComponent<SoLoader>();
             GetComponents();
             CardEvents.OnSoChange += AssetChange;
         }
@@ -20,7 +20,7 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.AssetLoader
         private void AssetChange(GameObject g)
         {
             if (g != gameObject) return;
-            var cardSo = _soLoader.cardSo;
+            var cardSo = SoLoader.So;
             if (cardSo) SetAsset(cardSo);
             else Debug.LogError("Null Asset");
         }

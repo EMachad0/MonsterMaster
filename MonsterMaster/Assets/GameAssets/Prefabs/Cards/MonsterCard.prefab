@@ -839,9 +839,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  asset: 
+--- !u!114 &-2448442286391280545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4282751151161499688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f5cb88c1d64cfba0751251ee9d051d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   maxHealth: 0
-  curHealth: 0
+  health: 0
+  atk: 0
+  def: 0
+  maxSickness: 0
 --- !u!1 &8005853331211431177
 GameObject:
   m_ObjectHideFlags: 0

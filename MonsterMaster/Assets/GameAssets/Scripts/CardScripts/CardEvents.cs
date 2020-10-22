@@ -1,20 +1,21 @@
-﻿using Mirror;
+﻿using System;
 using UnityEngine;
 
 namespace GameAssets.Scripts.CardScripts
 {
     public abstract class CardEvents
     {
-        public delegate void CardCollisionDelegate(GameObject a, GameObject b);
-        public static event CardCollisionDelegate OnCardCollision;
+        public static event Action<GameObject, GameObject> OnCardCollision;
         public static void CardCollision(GameObject a, GameObject b) => OnCardCollision?.Invoke(a, b);
-        
-        public delegate void CardAtkChangeDelegate(GameObject a, GameObject b);
-        public static event CardAtkChangeDelegate OnCardAtkChange;
-        public static void CardAtkChange(GameObject a, GameObject b) => OnCardAtkChange?.Invoke(a, b);
-        
-        public delegate void SoChangeDelegate(GameObject g);
-        public static event SoChangeDelegate OnSoChange;
+        public static event Action<GameObject> OnSoChange;
         public static void SoChange(GameObject g) => OnSoChange?.Invoke(g);
+        public static event Action<GameObject> OnCardDefChange;
+        public static void CardDefChange(GameObject g) => OnCardDefChange?.Invoke(g);
+        public static event Action<GameObject> OnCardAtkChange;
+        public static void CardAtkChange(GameObject g) => OnCardAtkChange?.Invoke(g);
+        public static event Action<GameObject> OnCardHealthChange;
+        public static void CardHealthChange(GameObject g) => OnCardHealthChange?.Invoke(g);
+        public static event Action<GameObject> OnCardSickChange;
+        public static void CardSickChange(GameObject g) => OnCardSickChange?.Invoke(g);
     }
 }
