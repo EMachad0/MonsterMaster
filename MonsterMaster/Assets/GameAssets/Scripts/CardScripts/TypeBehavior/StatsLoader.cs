@@ -25,7 +25,9 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior
 
         private void StatChange(GameObject g)
         {
+            if (g != gameObject) return;
             var so = (MonsterCardSo) _soLoader.So;
+            
             maxHealth = so.health;
             maxSickness = so.sickness;
             

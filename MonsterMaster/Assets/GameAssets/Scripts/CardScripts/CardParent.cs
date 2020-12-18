@@ -14,6 +14,7 @@ namespace GameAssets.Scripts.CardScripts
         private void ParentHook(GameObject oldValue, GameObject newValue)
         {
             transform.SetParent(newValue.transform, worldPosStay);
+            if (isServer) worldPosStay = true;
         }
     }
 }

@@ -13,7 +13,8 @@ namespace GameAssets.Scripts.CardScripts.FSMCard.States
         public override void StartState(CardFsm fsm)
         {
             base.StartState(fsm);
-            fsm.gameObject.layer = LayerMask.NameToLayer("CardHand");
+            fsm.gameObject.layer = LayerMask.NameToLayer("CardBoard");
+            fsm.GetComponent<CardFlip>().Show();
         }
 
         public override void EndDrag(CardFsm fsm)
@@ -23,7 +24,6 @@ namespace GameAssets.Scripts.CardScripts.FSMCard.States
             {
                 var enemy = colliders[0];
                 var controller = Server.LocalPlayer.GetComponent<CardController>();
-                // battleController.CmdShowBattle(fsm.gameObject, enemy);
                 controller.CmdCardCollision(fsm.gameObject, enemy);
                 base.EndDrag(fsm);
             }

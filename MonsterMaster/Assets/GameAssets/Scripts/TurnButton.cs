@@ -39,14 +39,7 @@ namespace GameAssets.Scripts
             Server.LocalPlayer.GetComponent<TurnController>().CmdEndTurn();
         }
 
-        public void Show()
-        {
-            transform.localScale = Vector3.one;
-        }
-        
-        public void Hide()
-        {
-            transform.localScale = Vector3.zero;
-        }
+        public void Show() => transform.localScale = Vector3.one;
+        public void Hide() => transform.localScale = Vector3.zero;
     }
 }

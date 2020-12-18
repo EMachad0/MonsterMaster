@@ -37,8 +37,6 @@ namespace GameAssets.Scripts.FSMTurnSystem
             OnEndTurn?.Invoke();
         }
         
-        public string State => nameof(state);
-
         public static event Action OnStartTurn;
         public static event Action OnEndTurn;
     }

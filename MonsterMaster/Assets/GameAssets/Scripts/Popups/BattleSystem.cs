@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using GameAssets.Scripts.CardScripts;
-using GameAssets.Scripts.CardScripts.TypeBehavior.AssetLoader;
+using GameAssets.Scripts.CardScripts.TypeBehavior;
 using Mirror;
 using UnityEngine;
 
@@ -12,8 +12,8 @@ namespace GameAssets.Scripts.Popups
         public float fadeoutTime;
         public float randomTime;
 
-        [SerializeField] private MonsterAssetLoader atkCard;
-        [SerializeField] private MonsterAssetLoader defCard;
+        [SerializeField] private GameObject atkCard;
+        [SerializeField] private GameObject defCard;
         [SerializeField] private RandomNumber atkNumber;
         [SerializeField] private RandomNumber defNumber;
         
@@ -21,8 +21,8 @@ namespace GameAssets.Scripts.Popups
 
         private void Awake()
         {
-            atkCard = transform.GetChild(3).GetComponent<MonsterAssetLoader>();
-            defCard = transform.GetChild(4).GetComponent<MonsterAssetLoader>();
+            atkCard = transform.GetChild(3).gameObject;
+            defCard = transform.GetChild(4).gameObject;
             atkNumber = transform.GetChild(5).GetComponent<RandomNumber>();
             defNumber = transform.GetChild(6).GetComponent<RandomNumber>();
             _canvas = GetComponent<CanvasGroup>();
@@ -43,24 +43,19 @@ namespace GameAssets.Scripts.Popups
 
         public void StartBattle(GameObject atk, GameObject def)
         {
-            // if (atk is null || def is null) return;
-            //
-            // gameObject.SetActive(true);
-            // _canvas.alpha = 1;
-            //
-            // StartCoroutine(ShowRoutine());
-            //
-            // if (!isServer) return;
-            // var atkController = atk.GetComponent<MonsterAssetLoader>();
-            // var defController = def.GetComponent<MonsterAssetLoader>();
-            //
-            // atkCard.asset = atkController.asset;
-            // atkCard.curHealth = atkController.curHealth;
-            // defCard.asset = defController.asset;
-            // defCard.curHealth = defController.curHealth;
-            //
-            // StartCoroutine(RandomNumbers(atkController.attack, defController.defense));
-            // StartCoroutine(ResolveBattle(atk, def));
+            if (atk is null || def is null) return;
+            
+            gameObject.SetActive(true);
+            _canvas.alpha = 1;
+            
+            StartCoroutine(ShowRoutine());
+            
+            if (!isServer) return;
+            atkCard.GetComponent<SoLoader>().soName = atk.GetComponent<SoLoader>().soName;
+            defCard.GetComponent<SoLoader>().soName = def.GetComponent<SoLoader>().soName;
+            
+            StartCoroutine(RandomNumbers(atk.GetComponent<StatsLoader>().atk, def.GetComponent<StatsLoader>().def));
+            StartCoroutine(ResolveBattle(atk, def));
         }
         
         private IEnumerator ShowRoutine()
@@ -86,21 +81,21 @@ namespace GameAssets.Scripts.Popups
             }
         }
 
-        // private IEnumerator ResolveBattle(GameObject atk, GameObject def)
-        // {
-        //     yield return new WaitForSeconds(time);
-        //
-        //     var damage = atkNumber.randomNumber - defNumber.randomNumber;
-        //     if (damage > 0)
-        //     {
-        //         defCard.curHealth -= damage;
-        //         def.GetComponent<MonsterAssetLoader>().curHealth -= damage;
-        //     }
-        //     else
-        //     {
-        //         atkCard.curHealth += damage;
-        //         atk.GetComponent<MonsterAssetLoader>().curHealth += damage;
-        //     }
-        // }
+        private IEnumerator ResolveBattle(GameObject atk, GameObject def)
+        {
+            yield return new WaitForSeconds(time);
+        
+            var damage = atkNumber.value - defNumber.value;
+            if (damage > 0)
+            {
+                defCard.GetComponent<StatsLoader>().health -= damage;
+                def.GetComponent<StatsLoader>().health -= damage;
+            }
+            else
+            {
+                atkCard.GetComponent<StatsLoader>().health += damage;
+                atk.GetComponent<StatsLoader>().health += damage;
+            }
+        }
     }
 }

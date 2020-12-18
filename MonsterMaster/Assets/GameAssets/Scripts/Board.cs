@@ -1,7 +1,4 @@
-using GameAssets.Scripts.CardScripts;
-using GameAssets.Scripts.CardScripts.FSMCard;
 using Mirror;
-using UnityEngine;
 
 namespace GameAssets.Scripts
 {
@@ -14,11 +11,8 @@ namespace GameAssets.Scripts
             if (transform.childCount > _lastChildCount)
             {
                 var nova = transform.GetChild(transform.childCount - 1);
-                var fsm = nova.GetComponent<CardFsm>();
-                nova.GetComponent<CardFlip>().Show();
-                nova.gameObject.layer = LayerMask.NameToLayer("CardBoard");
+                // do something with new card
             }
-
             _lastChildCount = transform.childCount;
         }
     }

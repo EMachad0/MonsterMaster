@@ -13,9 +13,10 @@ namespace GameAssets.Scripts
             NetworkServer.AddPlayerForConnection(conn, player);
         }
 
-        public override void OnServerDisconnect(NetworkConnection conn)
-        {
-            Server.LocalPlayer.GetComponent<Server>().CmdDisconnect();
-        }
+        // public override void OnServerDisconnect(NetworkConnection conn)
+        // {
+        //     Server.LocalPlayer.GetComponent<Server>().CmdDisconnect();
+        //     base.OnServerDisconnect(conn);
+        // }
     }
 }

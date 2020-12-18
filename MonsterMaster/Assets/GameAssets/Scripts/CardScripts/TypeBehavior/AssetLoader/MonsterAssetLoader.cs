@@ -7,6 +7,8 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.AssetLoader
 {
     public class MonsterAssetLoader : AbstractAssetLoader
     {
+        private StatsLoader _stats;
+        
         private Transform _front;
         private Image _background;
         private TextMeshProUGUI _cardName;
@@ -19,6 +21,7 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.AssetLoader
         protected override void Awake()
         {
             base.Awake();
+            _stats = GetComponent<StatsLoader>();
             CardEvents.OnCardHealthChange += OnCardHealthChange;
             CardEvents.OnCardAtkChange += OnCardAtkChange;
             CardEvents.OnCardDefChange += OnCardDefChange;
@@ -34,25 +37,22 @@ namespace GameAssets.Scripts.CardScripts.TypeBehavior.AssetLoader
         private void OnCardHealthChange(GameObject g)
         {
             if (g != gameObject) return;
-            var so = (MonsterCardSo) SoLoader.So;
             for (var i = 0; i < _healthBar.transform.childCount; i++)
             {
-                _healthBar.GetChild(i).gameObject.SetActive(i < so.health);
+                _healthBar.GetChild(i).gameObject.SetActive(i < _stats.health);
             }
         }
 
         private void OnCardAtkChange(GameObject g)
         {
             if (g != gameObject) return;
-            var so = (MonsterCardSo) SoLoader.So;
-            _atk.text = so.atk.ToString();
+            _atk.text = _stats.atk.ToString();
         }
 
         private void OnCardDefChange(GameObject g)
         {
             if (g != gameObject) return;
-            var so = (MonsterCardSo) SoLoader.So;
-            _def.text = so.def.ToString();
+            _def.text = _stats.def.ToString();
         }
 
 

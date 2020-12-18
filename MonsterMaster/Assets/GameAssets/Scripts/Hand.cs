@@ -1,4 +1,3 @@
-using UnityEngine;
 using Mirror;
 
 namespace GameAssets.Scripts
@@ -12,8 +11,8 @@ namespace GameAssets.Scripts
             if (transform.childCount > _lastChildCount)
             {
                 var nova = transform.GetChild(transform.childCount - 1);
+                // do something with new card
             }
-
             _lastChildCount = transform.childCount;
         }
     }

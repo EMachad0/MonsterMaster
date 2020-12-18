@@ -1,4 +1,3 @@
-using GameAssets.Scripts.ClientScripts.Controllers;
 using Mirror;
 using UnityEngine;
 
@@ -16,11 +15,6 @@ namespace GameAssets.Scripts.ClientScripts
             _canvas = GameObject.Find("Canvas");
         }
 
-        private void Start()
-        {
-            name = "P" + index;
-        }
-        
         public override void OnStartLocalPlayer()
         {
             switch (index)
